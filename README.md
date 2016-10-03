@@ -3,13 +3,13 @@ Low poly picture, Sandpainting for Android implemented by JNI
 
 ## Screenshots
 
-<img src="/screenshots/lowpoly0.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/lowpoly0.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/screenshots/lowpoly1.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/lowpoly1.png" alt="screenshot" title="screenshot" width="270" height="486" />
+<img src="/screenshots/lowpoly2.png" alt="screenshot" title="screenshot" width="270" height="486" /> <img src="/screenshots/lowpoly3.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-<img src="/screenshots/lowpoly2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+## Including in your project
 
-<img src="/screenshots/lowpoly3.png" alt="screenshot" title="screenshot" width="270" height="486" />
+Import the module `xlowpoly` to your project by Android Studio
 
 ## Usage
 
