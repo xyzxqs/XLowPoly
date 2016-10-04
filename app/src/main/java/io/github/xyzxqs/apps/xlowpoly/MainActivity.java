@@ -38,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox isFill;
 
     private boolean showLowPoly = true;
-    private boolean full = true;
+    private boolean fill = true;
 
     private static final String TAG = "MainActivity";
 
+    private RadioButton sandPaintingRB;
+    private RadioButton lowPolyRB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         textView1 = (TextView) findViewById(R.id.text1);
         textView2 = (TextView) findViewById(R.id.text2);
 
-        RadioButton lowPolyRB = (RadioButton) findViewById(R.id.low_poly);
-        RadioButton sandPaintingRB = (RadioButton) findViewById(R.id.sand_painting);
+        lowPolyRB = (RadioButton) findViewById(R.id.low_poly);
+        sandPaintingRB = (RadioButton) findViewById(R.id.sand_painting);
         isFill = (CheckBox) findViewById(R.id.fill_checkbox);
 
         lowPolyRB.setOnCheckedChangeListener(onCheckedChangeListener);
@@ -72,14 +74,17 @@ public class MainActivity extends AppCompatActivity {
         imageView.setImageBitmap(mImageBitmap);
         textView1.setOnClickListener(listener);
         textView2.setOnClickListener(listener);
-//        invokeExcute();
-
 
         seekBar1.setOnSeekBarChangeListener(changeListener);
         seekBar2.setOnSeekBarChangeListener(changeListener);
     }
 
-    View.OnClickListener listener = (v) -> imageView.setImageBitmap(mImageBitmap);
+    View.OnClickListener listener = (v) -> {
+        imageView.setImageBitmap(mImageBitmap);
+        lowPolyRB.setChecked(false);
+        isFill.setVisibility(View.GONE);
+        sandPaintingRB.setChecked(false);
+    };
 
     private SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
@@ -102,27 +107,29 @@ public class MainActivity extends AppCompatActivity {
 
     private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = (buttonView, isChecked) -> {
 
+        float a = seekBar1.getProgress() / (float) seekBar1.getMax();
         switch (buttonView.getId()) {
             case R.id.fill_checkbox:
-                full = isChecked;
+                fill = isChecked;
                 invokeExcute();
                 break;
             case R.id.low_poly:
-                float a = seekBar1.getProgress() / (float) seekBar1.getMax();
                 if (isChecked) {
                     isFill.setVisibility(View.VISIBLE);
                     showLowPoly = true;
                     seekBar1.setMax(1500);
                     seekBar1.setProgress((int) (1500 * a));
-                } else {
+                    invokeExcute();
+                }
+                break;
+            case R.id.sand_painting:
+                if (isChecked) {
                     isFill.setVisibility(View.GONE);
                     showLowPoly = false;
                     seekBar1.setMax(20000);
                     seekBar1.setProgress((int) (20000 * a));
+                    invokeExcute();
                 }
-                invokeExcute();
-                break;
-            case R.id.sand_painting:
                 break;
         }
     };
@@ -133,19 +140,18 @@ public class MainActivity extends AppCompatActivity {
     public void invokeExcute() {
         mLastProgress = seekBar1.getProgress();
         if (!isProess) {
-            PixelizeImageAsyncTask asyncPixelateTask = new PixelizeImageAsyncTask();
-            float alpha = seekBar1.getProgress() /*/ PROGRESS_TO_PIXELIZATION_FACTOR*/;
+            LowPolyAsyncTask task = new LowPolyAsyncTask();
+            float alpha = seekBar1.getProgress();
             int thre = seekBar2.getProgress();
             textView1.setText(String.format("点数：%s", alpha));
             textView2.setText(String.format("阈值：%s", thre));
-            asyncPixelateTask.execute(alpha, thre, mImageBitmap, showLowPoly);
+            task.execute(alpha, thre, mImageBitmap, showLowPoly);
         }
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -154,12 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             ObjectAnimator animator = ObjectAnimator.ofInt(isAlpha ? seekBar1 : seekBar2, "progress", 0,
                     isAlpha ? seekBar1.getMax() : seekBar2.getMax());
@@ -174,15 +175,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class PixelizeImageAsyncTask extends AsyncTask<Object, Void, Bitmap> {
+    private class LowPolyAsyncTask extends AsyncTask<Object, Void, Bitmap> {
 
         @Override
         protected Bitmap doInBackground(Object... params) {
-            float pixelizationFactor = (float) params[0];
+            float pointNum = (float) params[0];
             int thre = (int) params[1];
             Bitmap originalBitmap = (Bitmap) params[2];
             boolean lowPoly = (boolean) params[3];
-            return LowPoly.generate(originalBitmap, thre, pixelizationFactor, lowPoly, full);
+            return LowPoly.generate(originalBitmap, thre, pointNum, lowPoly, fill);
         }
 
         @Override

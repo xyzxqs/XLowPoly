@@ -35,7 +35,7 @@ public class LowPoly {
     /**
      * generate lowpoly picture
      * @param input src Bitmap
-     * @param alphaOrPointCount (0.0~1) or [1,max)
+     * @param alphaOrPointCount (0.0, 1) or [1, max)
      * @param fill fill ? Paint.Style.FILL : Paint.Style.STROKE
      * @return out Bitmap
      */
@@ -46,8 +46,8 @@ public class LowPoly {
     /**
      * generate sandpainting
      * @param input src Bitmap
-     * @param threshold recommend（30,90）
-     * @param alphaOrPointCount (0.0,1) or [1,max)
+     * @param threshold recommend（30, 90）
+     * @param alphaOrPointCount (0.0, 1) or [1, max)
      * @return out Bitmap
      */
     public static Bitmap sandPainting(Bitmap input, int threshold, float alphaOrPointCount) {
