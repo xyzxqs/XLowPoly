@@ -37,3 +37,6 @@ Bitmap out = LowPoly.lowPoly(Bitmap input, float alphaOrPointCount, boolean fill
      See the License for the specific language governing permissions and
      limitations under the License.
 
+##About
+
+[缘由和原理](./ABOUT-zh.md)
