@@ -1,4 +1,3 @@
-package io.github.xyzxqs.xlowpoly;
 /*
  *  Copyright 2016 xyzxqs (xyzxqs@gmail.com)
  *
@@ -14,6 +13,8 @@ package io.github.xyzxqs.xlowpoly;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package io.github.xyzxqs.xlowpoly;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -34,9 +35,10 @@ public class LowPoly {
 
     /**
      * generate lowpoly picture
-     * @param input src Bitmap
+     *
+     * @param input             src Bitmap
      * @param alphaOrPointCount (0.0, 1) or [1, max)
-     * @param fill fill ? Paint.Style.FILL : Paint.Style.STROKE
+     * @param fill              fill ? Paint.Style.FILL : Paint.Style.STROKE
      * @return out Bitmap
      */
     public static Bitmap lowPoly(Bitmap input, float alphaOrPointCount, boolean fill) {
@@ -45,8 +47,9 @@ public class LowPoly {
 
     /**
      * generate sandpainting
-     * @param input src Bitmap
-     * @param threshold recommend（30, 90）
+     *
+     * @param input             src Bitmap
+     * @param threshold         recommend（30, 90）
      * @param alphaOrPointCount (0.0, 1) or [1, max)
      * @return out Bitmap
      */
@@ -72,8 +75,8 @@ public class LowPoly {
         }
         int[] triangles = getTriangles(pixels, width, height, threshold, alphaOrPointCount, lowPoly);
         if (lowPoly) {
+            Path path = new Path();
             for (int i = 0; i + 5 < triangles.length; i = i + 6) {
-
                 x1 = triangles[i];
                 y1 = triangles[i + 1];
                 x2 = triangles[i + 2];
@@ -82,7 +85,7 @@ public class LowPoly {
                 y3 = triangles[i + 5];
 
                 int color = input.getPixel((x1 + x2 + x3) / 3, (y1 + y2 + y3) / 3);
-                Path path = new Path();
+                path.rewind();
                 path.moveTo(x1, y1);
                 path.lineTo(x2, y2);
                 path.lineTo(x3, y3);
