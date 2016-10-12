@@ -9,13 +9,17 @@ Low poly picture, Sandpainting for Android implemented by JNI
 
 ## Including in your project
 
-Add a dependency:
+To add a dependency on xlowpoly using Gradle:
 
 ```gradle
-compile 'io.github.xyzxqs:xlowpoly:1.0.1'
+dependencies {
+  compile 'io.github.xyzxqs:xlowpoly:1.0.1'
+}
 ```
 
 or import the module `xlowpoly` to your project by Android Studio
+
+You can also use [these source files](./xlowpoly/src/main/cpp/) to compile cross platform program.
 
 ## Usage
 
