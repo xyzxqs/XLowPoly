@@ -21,16 +21,12 @@
 #ifndef XLOWPOLY_LOG_H
 #define XLOWPOLY_LOG_H
 
-#define PRINT_DEBUG_LOG
+#include <android/log.h>
 
-void _log_v(const char *tag, const char *fmt, ...);
-
-void _log_d(const char *tag, const char *fmt, ...);
-
-void _log_i(const char *tag, const char *fmt, ...);
-
-void _log_w(const char *tag, const char *fmt, ...);
-
-void _log_e(const char *tag, const char *fmt, ...);
+#define _log_i(tag, ...) __android_log_print(ANDROID_LOG_INFO, tag, __VA_ARGS__)
+#define _log_d(tag, ...) __android_log_print(ANDROID_LOG_DEBUG, tag, __VA_ARGS__)
+#define _log_e(tag, ...) __android_log_print(ANDROID_LOG_ERROR, tag, __VA_ARGS__)
+#define _log_w(tag, ...) __android_log_print(ANDROID_LOG_WARN, tag, __VA_ARGS__)
+#define _log_v(tag, ...) __android_log_print(ANDROID_LOG_VERBOSE, tag, __VA_ARGS__)
 
 #endif //XLOWPOLY_LOG_H

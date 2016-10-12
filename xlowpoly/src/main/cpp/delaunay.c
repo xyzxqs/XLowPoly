@@ -27,7 +27,7 @@
 #include "_log.h"
 #include "point.h"
 
-
+//do not define DEBUG_DELAUNAY 1  :)
 #define DEBUG_DELAUNAY 0
 
 //Local Optimization Procedure
@@ -242,16 +242,17 @@ void trinet_point_add(const int target_point_index, const TriNet *triNet) {
 #endif
     for (AngNode *p = angs_head->next; p != NULL;) {
         triangle_remove(p->vertex, p->subtense, triNet);
-        int sub_index = p->subtense->nock_vertex;
+        int nock = p->subtense->nock_vertex;
+        int arrow = p->subtense->arrow_vertex;
         arcnode_add(arcs_head, p->subtense);
         Arc *head = (triNet->arcs_heads)[p->vertex];
         pnode_unique_add(points_head, p->vertex);
         for (Arc *pa = head->next; pa != NULL;) {
-            if (pa->arrow_vertex == p->subtense->arrow_vertex) {
+            if (pa->arrow_vertex == arrow) {
                 arcnode_add(arcs_head, pa);
                 pnode_unique_add(points_head, pa->arrow_vertex);
             }
-            if (pa->arrow_vertex == sub_index) {
+            if (pa->arrow_vertex == nock) {
                 arcnode_add(arcs_head, pa);
                 pnode_unique_add(points_head, pa->arrow_vertex);
             }

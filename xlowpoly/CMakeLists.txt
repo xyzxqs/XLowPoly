@@ -24,8 +24,7 @@ add_library( # Sets the name of the library.
              src/main/cpp/lowpoly.c
              src/main/cpp/dilution.c
              src/main/cpp/point.c
-             src/main/cpp/_log.c
-             src/main/cpp/dedup.c)
+             src/main/cpp/dedup.c )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because system libraries are included in the search path by
