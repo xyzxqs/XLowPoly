@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "io.github.xyzxqs.apps.xlowpoly"
         minSdkVersion 17
@@ -45,5 +45,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
+//    compile 'io.github.xyzxqs:xlowpoly:1.0.1'
     compile project(':xlowpoly')
 }
