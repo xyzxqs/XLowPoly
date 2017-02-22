@@ -1,5 +1,5 @@
 # XLowPoly
-Low poly picture, Sandpainting for Android implemented by JNI
+Low poly picture, Sandpainting for Android implemented by JNI, delaunay triangulation algorithm.
 
 ## Screenshots
 
@@ -46,7 +46,3 @@ Bitmap out = LowPoly.lowPoly(Bitmap input, float alphaOrPointCount, boolean fill
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-
-##About
-
-[缘由和原理](./ABOUT-zh.md)
