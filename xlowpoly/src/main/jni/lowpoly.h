@@ -21,7 +21,16 @@
 #ifndef XLOWPOLY_LOW_POLY_H
 #define XLOWPOLY_LOW_POLY_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif //__cplusplus
+
 void get_triangles(const int *pixels, int size_pixels, int w, int h, int threshold,
                    float alpha_pointcount, int *result, int *size_result, unsigned char lowpoly);
+
+
+#ifdef __cplusplus
+};
+#endif //__cplusplus
 
 #endif //XLOWPOLY_LOW_POLY_H

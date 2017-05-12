@@ -18,13 +18,13 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              # Associated headers in the same location as their source
              # file are automatically included.
-             src/main/cpp/lowpoly-lib.cpp
-             src/main/cpp/sobel.c
-             src/main/cpp/delaunay.c
-             src/main/cpp/lowpoly.c
-             src/main/cpp/dilution.c
-             src/main/cpp/point.c
-             src/main/cpp/dedup.c )
+             src/main/jni/lowpoly-lib.c
+             src/main/jni/sobel.c
+             src/main/jni/delaunay.c
+             src/main/jni/lowpoly.c
+             src/main/jni/dilution.c
+             src/main/jni/point.c
+             src/main/jni/dedup.c )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because system libraries are included in the search path by
