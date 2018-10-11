@@ -19,7 +19,7 @@ dependencies {
 
 or import the module `xlowpoly` to your project by Android Studio
 
-You can also use [these source files](./xlowpoly/src/main/cpp/) to compile cross platform program.
+You can also use [these source files](./xlowpoly/src/main/jni/) to compile cross platform program.
 
 ## Usage
 
