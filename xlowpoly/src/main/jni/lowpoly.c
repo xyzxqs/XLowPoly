@@ -30,13 +30,27 @@
 
 
 
-//sobel callback madthod
+//sobel callback method
 bool call(int magnitude, int x, int y);
 
 ///////////////////
 
 int threshold = 40;
 
+/**
+ * pixels: colors are non-premultiplied ARGB values in the sRGB color space.
+ *  int color = pixel[w * y + x];
+ *  int blue = color & 0xFF;
+ *  int green = (color >> 8) & 0xFF;
+ *  int red = (color >> 16) & 0xFF;
+ *  int alpha = (color >> 24) & 0xFF;
+ *
+ * size: pixels 's length
+ * w: img width in pixels
+ * h: img height in pixels
+ * thre : threshold 阈值
+ * alpha : in percent 过滤百分比或点数(0.0, 1) or [1, max)
+ */
 void get_triangles(const int *pixels, int size, int w, int h, int thre, float alpha,
                    int *result, int *size_result, unsigned char lowpoly) {
     threshold = thre;
@@ -75,7 +89,8 @@ void get_triangles(const int *pixels, int size, int w, int h, int thre, float al
         pnode_free(triangles);
         free(triangles);
         triangles = NULL;
-    } else {
+    }
+    else {
         for (int i = 0; i < size_vertices; i++) {
             Point *pi = &(vertices[i]);
             result[(*size_result)++] = pi->x;
@@ -85,11 +100,7 @@ void get_triangles(const int *pixels, int size, int w, int h, int thre, float al
 }
 
 bool call(int magnitude, int x, int y) {
-    if (magnitude > threshold) {
-        return true;
-    } else {
-        return false;
-    }
+    return magnitude > threshold;
 }
 
 
